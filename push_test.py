@@ -54,5 +54,5 @@ class PushMsg(object):
 
 if __name__ == '__main__':
     Pmsg = PushMsg()
-    Pmsg.sendmeg('www.baidu.com', '百度搜索 \n1baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', '你好')
+    Pmsg.sendmeg('https://www.jinse.cn/lives/347704.html', '百度搜索 \n1baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', '你好')
 
