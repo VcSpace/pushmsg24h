@@ -29,7 +29,7 @@ class Jinse(object):
 
                     m_list = m_json['list']
                     m_lives = m_list[0]['lives']
-                    for n in range(20):
+                    for n in range(10):
                         content = m_lives[n]['content']
                         content_prefix = m_lives[n]['content_prefix']
                         id = m_lives[n]['id']
@@ -39,25 +39,26 @@ class Jinse(object):
                             break
                         else:
                             Pmsg.sendmeg(news_url, content, content_prefix)
-                            time.sleep(5)
+                            time.sleep(3)
 
-                    self.topid = m_json['top_id']
-
-                    # if self.date == m_list[0]['date']:
-                    #     for tt in range(3):
-                    #         id = m_lives[tt]['id']
-                    #         if self.topid == id:
-                    #             break
-                    #         url = 'https://www.jinse.com/lives/{0}.html'.format(str(id))
-                    #         content = m_lives[tt]['content']
-                    #         content_prefix = m_lives[tt]['content_prefix']
-                    #         is_sendmeg(url, content, content_prefix)
-                    # else: #新一天
-                    #     self.date = m_list[0]['date']
-                    #     url = 'https://www.jinse.com/lives/{0}.html'.format(str(id))
-                    #     content = m_lives[0]['content']
-                    #     content_prefix = m_lives[0]['content_prefix']
-                    #     is_sendmeg(url, content, content_prefix)
+                    if self.date != m_list[0]['date'] and self.date != '':
+                        for n in range(5):
+                            try:
+                                m_lives = m_list[1]['lives']
+                                content = m_lives[n]['content']
+                                content_prefix = m_lives[n]['content_prefix']
+                                id = m_lives[n]['id']
+                                news_url = 'https://www.jinse.cn/lives/{0}.html'.format(id)
+                                if self.topid == id:
+                                    print("topid == json_topid")
+                                    break
+                                else:
+                                    Pmsg.sendmeg(news_url, content, content_prefix)
+                                    time.sleep(5)
+                            except Exception as e:
+                                print(e)
+                self.date = m_list[0]['date']
+                self.topid = m_json['top_id']
                 time.sleep(300)
             except Exception as e:
                 print(e)
