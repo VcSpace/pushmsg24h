@@ -1,7 +1,5 @@
 # pushmsg24h
-7*24小时区块链快讯
-
-获取快讯，使用Bark-server推送到Bark App中
+7*24小时区块链快讯, 使用[Bark-server](https://github.com/Finb/bark-server.git)推送到Bark App中
 
 install:
 
