@@ -1,7 +1,19 @@
+import threading
+
 from src.jinse import Js
+from src.odaily import oda
+from src.sql_insert import Sql
 
-# https://www.vcvc.link/AgCXLFdUwrikg4xQa4boT6/推送标题/这里改成你自己的推送内容
-# docker run -d -p 8080:8080 finab/bark-server
-
+def run():
+    t1 = threading.Thread(target=Js.get_news, args=())
+    t2 = threading.Thread(target=oda.get_news, args=())
+    t1.start()
+    t2.start()
+    t1.join()
+    t2.join()
 if __name__ == '__main__':
-    Js.get_news()
+    # run()
+    # Js.get_news()
+    oda.get_news()
+
+    # print('')
