@@ -9,9 +9,9 @@ class Config(object):
         # 读取config.ini文件
         self.config.read(ini_path)
 
-    def get_server_name(self):
-        serv_name = self.config.get('DEFAULT', 'server_name')
-        return serv_name
+    def get_server_host(self):
+        serv_host = self.config.get('DEFAULT', 'server_host')
+        return serv_host
 
     def get_server_key(self):
         serv_key = self.config.get('DEFAULT', 'server_key')
@@ -24,5 +24,13 @@ class Config(object):
     def get_aes_iv(self):
         iv = self.config.get('DEFAULT', 'aes_iv')
         return iv
+
+    def get_sql_info(self):
+        sql_host = self.config.get('MYSQL', 'sql_host')
+        sql_username = self.config.get('MYSQL', 'sql_username')
+        sql_password = self.config.get('MYSQL', 'sql_password')
+        sql_database = self.config.get('MYSQL', 'sql_database')
+        sql_table = self.config.get('MYSQL', 'sql_table')
+        return sql_host, sql_username, sql_password, sql_database, sql_table
 
 config = Config()
