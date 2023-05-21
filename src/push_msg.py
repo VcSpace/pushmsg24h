@@ -17,13 +17,13 @@ class PushMsg(object):
     def deal_msg(self, news_url, news_content, news_title):
         self.cipher = AES.new(self.aes_key.encode(), AES.MODE_CBC, self.aes_iv.encode())
 
-        json = '{{"title": "{0}","body": "{1}", "url": "{2}", "sound": "healthnotification"}}'.format(
-            news_title, news_content.replace("\n", "\\n"), news_url)
+        m_json = '{{"title": "{0}","body": "{1}", "url": "{2}", "sound": "healthnotification"}}'.format(
+            news_title, news_content.replace("\n", "\\n").replace("\"", "\\\""), news_url)
 
-        print(json)
+        print(m_json)
 
         # 把字符串转换为字节
-        message = json.encode()
+        message = m_json.encode()
         # 对字节进行填充，使其长度为16的倍数
         pad_length = 16 - len(message) % 16
         message += bytes([pad_length]) * pad_length

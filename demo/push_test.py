@@ -1,6 +1,7 @@
 import requests
 from Crypto.Cipher import AES
 import base64
+import json
 from src.config import config
 from src.jinse import Js
 from src.odaily import oda
@@ -19,13 +20,12 @@ class PushMsg(object):
         }
     def deal_msg(self, news_url, news_content, news_content_prefix):
         self.cipher = AES.new(self.aes_key.encode(), AES.MODE_CBC, self.aes_iv.encode())
-        json = '{{"title": "{0}","body": "{1}", "url": "{2}", "sound": "healthnotification"}}'.format(
-            news_content_prefix, news_content.replace("\n", "\\n"), news_url)
-
-        print(json)
+        m_json = '{{"title": "{0}","body": "{1}", "url": "{2}", "sound": "healthnotification"}}'.format(
+            news_content_prefix, news_content.replace("\n", "\\n").replace("\"", "\\\""), news_url)
+        print(m_json)
 
         # 把字符串转换为字节
-        message = json.encode()
+        message = m_json.encode()
         # 对字节进行填充，使其长度为16的倍数
         pad_length = 16 - len(message) % 16
         message += bytes([pad_length]) * pad_length
@@ -56,5 +56,5 @@ class PushMsg(object):
 
 if __name__ == '__main__':
     Pmsg = PushMsg()
-    Pmsg.sendmeg('www.jinse.cn/lives/347704.html', '百度搜索 \n1baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', '你好')
+    Pmsg.sendmeg('www.jinse.cn/lives/347704.html', '百度搜索 \naaaaa"a"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', '你好')
 
