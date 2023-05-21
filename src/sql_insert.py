@@ -5,6 +5,8 @@ class in_MySql(object):
     def __init__(self):
         host = config.get_server_host()
         self.localhost , self.sql_username, self.sql_password, self.sql_database, self.sql_table = config.get_sql_info()
+
+    def connect(self):
         self.db = pymysql.connect(self.localhost, self.sql_username, self.sql_password, self.sql_database)
 
         # 使用cursor()方法获取操作游标
