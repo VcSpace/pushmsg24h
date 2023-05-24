@@ -12,8 +12,6 @@ def run():
     t1.join()
     t2.join()
 if __name__ == '__main__':
-    # run()
+    run()
     # Js.get_news()
-    oda.get_news()
-
-    # print('')
+    # oda.get_news()

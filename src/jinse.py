@@ -56,11 +56,14 @@ class Jinse(object):
                                 break
                             else:
                                 Pmsg.sendmeg(news_url, content, content_prefix)
-                                time.sleep(5)
+                                time.sleep(3)
                         except Exception as e:
                             print(e)
-                self.date = m_list[0]['date']
-                self.topid = m_json['top_id']
+                try:
+                    self.date = m_list[0]['date']
+                    self.topid = m_json['top_id']
+                except Exception as e:
+                    print(e)
             time.sleep(300)
 
 Js = Jinse()
