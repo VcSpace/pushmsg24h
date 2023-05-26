@@ -1,7 +1,9 @@
 import requests
 import time
 import json
+import distutils
 
+from requests.cookies import RequestsCookieJar
 from src.push_msg import Pmsg
 
 class TOKEN_IN(object):
@@ -12,19 +14,30 @@ class TOKEN_IN(object):
     def get_news(self):
         while True:
             session = requests.Session()
-            session.get('https://cn.tokeninsight.com/zh/news')
+            # cookie_jar = session.get('https://cn.tokeninsight.com/zh/news').cookies
+            # cookie_t = requests.utils.dict_from_cookiejar(cookie_jar)
             m_json = ''
             url = 'https://tokeninsight.com/apiv2/research/newsList'
-            headers = {
+            url = 'https://back.tokeninsight.com/app/news/list?date=&page=1&size=30'
+            headers2 = {
                 'Accept': 'application/json, text/plain, */*',
                 'referer': 'https://tokeninsight.com/zh/news',
-                'Host': 'cn.tokeninsight.com',
                 'Content-Type':'application/json',
-                'cookie': 'language_=zh; language=cn; _ga=GA1.1.1942975179.1684938824; _ga_3F9MFYLVT6=GS1.1.1684938824.1.1.1684939141.60.0.0; __cf_bm=gSjkNX.lfGox_nyh4aU01V.9ePt3GhDFI0lFz6YaTpQ-1684939151-0-AWerUzhwL71tAEiglNbAAU2JRxXBZG7Gtb2nJOh+hNpWbwoUf8YLw7r1hHtvx1eQuzbQ4ON1Zr+NsT1X8d7Arvc=; cookieShow=true',
+                'Cookie': 'language_=zh; language=cn; cf_bm=18BF4wWkNwA9vouobb_pe3ZNfmODPDeekfZIVIP88Is-1684942722-0-AVpxJJgapGxbRLA0SOFl0v6XV3b7AQA/6/GqM3My8AIUaVe4pINfeyTais+qRRbr3XJzVY1jPJv0DeVchdvzKT0=; SERVERID=efe99b30cbeeac07a0a49ddc4c447aee|1684943591|1684942722; SERVERCORSID=efe99b30cbeeac07a0a49ddc4c447aee|1684943591|1684942722',
                 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15'
             }
+
+            headers = {
+                'Host': 'back.tokeninsight.com',
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                'Accept': '*/*',
+                'lan': 'cn',
+                'platform': 'iOS',
+                'User-Agent': 'TokenInsight_iOS/1.3.4 (iPhone; iOS 16.1.1; Scale/3.00)',
+                'Connection': 'keep-alive'
+            }
             data = '{{\"current\":1,\"language\":\"cn\",\"pageSize\":10,\"tagId\":\"\",\"startDate\":\"\",\"endDate\":\"\"}}'
-            data2 = {
+            data = {
                 "current":1,
                 "language":"cn",
                 "pageSize":10,
@@ -34,7 +47,7 @@ class TOKEN_IN(object):
             }
 
             try:
-                res = session.post(url, headers=headers, data=data, timeout=60)
+                res = session.get(url, headers=headers, timeout=60)
                 if res.status_code == 200:
                     one_json = json.loads(res.text)
                     m_json = one_json['data']['list']
