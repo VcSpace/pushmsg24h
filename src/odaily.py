@@ -25,7 +25,7 @@ class oDaily(object):
                     m_json = od_json['data']['items']
                     if self.topid == m_json[0]['id']:
                         print('topid == json_topid' )
-                        time.sleep(300)
+                        time.sleep(600)
                         continue
 
                     for n in range(len(m_json)):
@@ -40,9 +40,11 @@ class oDaily(object):
                             Pmsg.sendmeg(news_url, content, content_title)
                             time.sleep(3)
 
-                self.topid = m_json[0]['id']
-                time.sleep(300)
+                    self.topid = m_json[0]['id']
+                    print("发送成功 timesleep")
+                time.sleep(600)
             except Exception as e:
+                time.sleep(600)
                 print(e)
 
 oda = oDaily()
