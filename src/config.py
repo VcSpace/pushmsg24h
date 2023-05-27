@@ -33,4 +33,8 @@ class Config(object):
         sql_table = self.config.get('MYSQL', 'sql_table')
         return sql_host, sql_username, sql_password, sql_database, sql_table
 
+    def get_ti_key(self):
+        ti_key = self.config.get('tkinsight', 'api_key')
+        return ti_key
+
 config = Config()

@@ -3,7 +3,7 @@ import threading
 from src.jinse import Js
 from src.odaily import oda
 from src.babtc import babtc
-from src.tokeninsight import tkin
+from src.tokeninsight import ti
 from src.sql_insert import Sql
 
 def run():
@@ -17,4 +17,4 @@ if __name__ == '__main__':
     run()
     # Js.get_news()
     # oda.get_news()
-    # tkin.get_news()
+    # ti.get_news()
