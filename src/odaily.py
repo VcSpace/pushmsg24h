@@ -24,7 +24,7 @@ class oDaily(object):
                     od_json = json.loads(res.text)
                     m_json = od_json['data']['items']
                     if self.topid == m_json[0]['id']:
-                        print('topid == json_topid' )
+                        print('od_topid == json_topid' )
                         time.sleep(600)
                         continue
 
@@ -34,14 +34,14 @@ class oDaily(object):
                         id = m_json[n]['id']
                         news_url = 'www.odaily.news/newsflash/{0}'.format(id)
                         if self.topid == id:
-                            print("topid == json_topid")
+                            print("od_topid == json_id")
                             break
                         else:
                             Pmsg.sendmeg(news_url, content, content_title)
                             time.sleep(3)
 
                     self.topid = m_json[0]['id']
-                    print("发送成功 timesleep")
+                    print("od_发送成功 timesleep")
                 time.sleep(600)
             except Exception as e:
                 time.sleep(600)
