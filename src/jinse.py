@@ -23,7 +23,7 @@ class Jinse(object):
                 if res.status_code == 200:
                     m_json = json.loads(res.text)
                     if self.topid == m_json['top_id']:
-                        print('topid == json_topid' )
+                        print('jin_topid == json_topid' )
                         time.sleep(600)
                         continue
 
@@ -36,7 +36,7 @@ class Jinse(object):
                             id = m_lives[n]['id']
                             news_url = 'www.jinse.cn/lives/{0}.html'.format(id)
                             if self.topid == id:
-                                print("topid == json_topid")
+                                print("jin_topid == json_id")
                                 break
                             else:
                                 Pmsg.sendmeg(news_url, content, content_prefix)
@@ -53,7 +53,7 @@ class Jinse(object):
                                 id = m_lives[n]['id']
                                 news_url = 'https://www.jinse.cn/lives/{0}.html'.format(id)
                                 if self.topid == id:
-                                    print("topid == json_topid")
+                                    print("jin_topid == json_id")
                                     break
                                 else:
                                     Pmsg.sendmeg(news_url, content, content_prefix)
@@ -62,7 +62,7 @@ class Jinse(object):
                                 print(e)
                     self.date = m_list[0]['date']
                     self.topid = m_json['top_id']
-                    print("发送成功 timesleep")
+                    print("jin_发送成功 timesleep")
                 time.sleep(600)
             except Exception as e:
                 time.sleep(600)
