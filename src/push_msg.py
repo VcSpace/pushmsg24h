@@ -18,7 +18,7 @@ class PushMsg(object):
         self.cipher = AES.new(self.aes_key.encode(), AES.MODE_CBC, self.aes_iv.encode())
 
         m_json = '{{"title": "{0}","body": "{1}", "url": "{2}", "sound": "healthnotification"}}'.format(
-            news_title, news_content.replace("\n", "\\n").replace("\"", "\\\""), news_url)
+            news_title.replace("\"", "\\\""), news_content.replace("\n", "\\n").replace("\"", "\\\""), news_url)
 
         print(m_json)
 
