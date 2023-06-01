@@ -1,8 +1,11 @@
 import requests
-from Crypto.Cipher import AES
+import threading
 import base64
+
+from Crypto.Cipher import AES
 from src.config import config
 
+mutex = threading.Lock() # 创建一个锁对象
 class PushMsg(object):
     def __init__(self):
         self.serv_host = config.get_server_host()
@@ -15,25 +18,30 @@ class PushMsg(object):
             'Host': '{0}:8080'.format(self.serv_host)
         }
     def deal_msg(self, news_url, news_content, news_title):
-        self.cipher = AES.new(self.aes_key.encode(), AES.MODE_CBC, self.aes_iv.encode())
+        try:
+            mutex.acquire()  # 获取锁
+            self.cipher = AES.new(self.aes_key.encode(), AES.MODE_CBC, self.aes_iv.encode())
 
-        m_json = '{{"title": "{0}","body": "{1}", "url": "{2}", "sound": "healthnotification"}}'.format(
-            news_title.replace("\"", "\\\""), news_content.replace("\n", "\\n").replace("\"", "\\\""), news_url)
+            m_json = '{{"title": "{0}","body": "{1}", "url": "{2}", "sound": "healthnotification"}}'.format(
+                news_title.replace("\"", "\\\""), news_content.replace("\n", "\\n").replace("\"", "\\\""), news_url)
 
-        print(m_json)
+            print(m_json)
 
-        # 把字符串转换为字节
-        message = m_json.encode()
-        # 对字节进行填充，使其长度为16的倍数
-        pad_length = 16 - len(message) % 16
-        message += bytes([pad_length]) * pad_length
-        # 加密字节
-        token = self.cipher.encrypt(message)
-        # 把加密后的字节转换为base64字符串
-        token = base64.b64encode(token).decode()
-        # 打印加密后的结果
-        # print(token)
-        return token
+            # 把字符串转换为字节
+            message = m_json.encode()
+            # 对字节进行填充，使其长度为16的倍数
+            pad_length = 16 - len(message) % 16
+            message += bytes([pad_length]) * pad_length
+            # 加密字节
+            token = self.cipher.encrypt(message)
+            # 把加密后的字节转换为base64字符串
+            token = base64.b64encode(token).decode()
+
+            mutex.release()  # 释放锁
+            return token
+        except Exception as e:
+            mutex.release()  # 释放锁
+            print(e)
 
 
     def sendmeg(self, news_url, news_content, news_title):
