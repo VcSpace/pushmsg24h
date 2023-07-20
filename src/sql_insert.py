@@ -4,13 +4,13 @@ import pymysql
 class in_MySql(object):
     def __init__(self):
         host = config.get_server_host()
-        self.localhost , self.sql_username, self.sql_password, self.sql_database, self.sql_table = config.get_sql_info()
+        # self.localhost , self.sql_username, self.sql_password, self.sql_database, self.sql_table = config.get_sql_info()
 
     def connect(self):
-        self.db = pymysql.connect(self.localhost, self.sql_username, self.sql_password, self.sql_database)
+        # self.db = pymysql.connect(self.localhost, self.sql_username, self.sql_password, self.sql_database)
 
         # 使用cursor()方法获取操作游标
-        self.cursor = self.db.cursor()
+        # self.cursor = self.db.cursor()
         #
         # sql = """INSERT INTO {0}(
         #          news_id, news_title, news_content, news_url, now())
@@ -25,7 +25,7 @@ class in_MySql(object):
         #    self.db.rollback()
 
         # 关闭数据库连接
-        self.db.close()
+        # self.db.close()
 
 
 Sql = in_MySql()

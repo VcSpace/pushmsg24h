@@ -25,16 +25,16 @@ class Config(object):
         iv = self.config.get('DEFAULT', 'aes_iv')
         return iv
 
-    def get_sql_info(self):
-        sql_host = self.config.get('MYSQL', 'sql_host')
-        sql_username = self.config.get('MYSQL', 'sql_username')
-        sql_password = self.config.get('MYSQL', 'sql_password')
-        sql_database = self.config.get('MYSQL', 'sql_database')
-        sql_table = self.config.get('MYSQL', 'sql_table')
-        return sql_host, sql_username, sql_password, sql_database, sql_table
-
-    def get_ti_key(self):
-        ti_key = self.config.get('tkinsight', 'api_key')
-        return ti_key
+    # def get_sql_info(self):
+    #     sql_host = self.config.get('MYSQL', 'sql_host')
+    #     sql_username = self.config.get('MYSQL', 'sql_username')
+    #     sql_password = self.config.get('MYSQL', 'sql_password')
+    #     sql_database = self.config.get('MYSQL', 'sql_database')
+    #     sql_table = self.config.get('MYSQL', 'sql_table')
+    #     return sql_host, sql_username, sql_password, sql_database, sql_table
+    #
+    # def get_ti_key(self):
+    #     ti_key = self.config.get('tkinsight', 'api_key')
+    #     return ti_key
 
 config = Config()
