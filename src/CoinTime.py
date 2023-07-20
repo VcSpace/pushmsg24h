@@ -23,7 +23,7 @@ class CoinTime(object):
                     m_json = coin_json['data']
                     if self.topid == m_json[0]['itemId']:
                         print('coin_time_topid == json_topid' )
-                        time.sleep(6)
+                        time.sleep(600)
                         continue
 
                     for n in range(len(m_json)):
@@ -40,9 +40,9 @@ class CoinTime(object):
 
                     self.topid = m_json[0]['itemId']
                     print("cointime_发送成功 timesleep")
-                time.sleep(6)
+                time.sleep(600
             except Exception as e:
-                time.sleep(6)
+                time.sleep(600)
                 print(e)
 
 coin_time = CoinTime()
