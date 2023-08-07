@@ -30,7 +30,7 @@ class CoinTime(object):
                         content = m_json[n]['description']
                         content_title = m_json[n]['title']
                         uri = m_json[n]['uri']
-                        news_url = 'cn.cointime.com/flash-news{0}'.format(uri)
+                        news_url = 'cn.cointime.com{0}'.format(uri)
                         if self.topid == id:
                             print("od_topid == json_id")
                             break
