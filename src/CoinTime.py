@@ -21,8 +21,6 @@ class CoinTime(object):
                 if res.status_code == 200:
                     coin_json = json.loads(res.text)
                     m_json = coin_json['data']
-                    print(m_json[0]['itemId'], '\n')
-                    print(self.topid)
                     if self.topid == m_json[0]['itemId']:
                         print('coin_time_topid == json_topid' )
                         time.sleep(600)
@@ -42,7 +40,7 @@ class CoinTime(object):
 
                     self.topid = m_json[0]['itemId']
                     print("cointime_发送成功 timesleep")
-                time.sleep(600)
+                time.sleep(1200)
             except Exception as e:
                 time.sleep(600)
                 print(e)
