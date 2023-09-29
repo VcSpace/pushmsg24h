@@ -16,6 +16,12 @@ docker run -dt --name bark --restart unless-stopped -p 8080:8080 -v /root/bark-d
 
 ---
 
+### 方法2: Render
+
+https://bark.day.app/#/deploy?id=render
+
+---
+
 ## Donation | 捐助
 
 BTC: 32vRquAmkWeKtfkntxHVYsrLh57b7kutan
